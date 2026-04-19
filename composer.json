@@ -1,5 +1,5 @@
 {
-    "name"       : "hoa/exception",
+    "name"       : "enojaroff/hoa-exception",
     "description": "The Hoa\\Exception library.",
     "type"       : "library",
     "keywords"   : ["library", "exception"],
@@ -23,9 +23,9 @@
         "source": "https://central.hoa-project.net/Resource/Library/Exception"
     },
     "require": {
-        "php"            : ">=7.1",
-        "hoa/consistency": "dev-master",
-        "hoa/event"      : "dev-master"
+        "php"            : ">=8.0",
+        "enojaroff/hoa-consistency": "dev-master",
+        "enojaroff/hoa-event"      : "dev-master"
     },
     "require-dev": {
         "hoa/test": "dev-master"

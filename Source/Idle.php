@@ -81,9 +81,9 @@ class Idle extends \Exception
      */
     public function __construct(
         string $message,
-        int $code            = 0,
-        $arguments           = [],
-        \Exception $previous = null
+        int $code                     = 0,
+        array|string|int $arguments   = [],
+        ?\Throwable $previous         = null
     ) {
         $this->_tmpArguments = $arguments;
         parent::__construct($message, $code, $previous);
@@ -112,7 +112,7 @@ class Idle extends \Exception
      *
      * Do not use `Exception::getPrevious` any more.
      */
-    public function getPreviousThrow(): ?\Exception
+    public function getPreviousThrow(): ?\Throwable
     {
         if (null === $this->_previous) {
             $this->_previous = $this->getPrevious();
@@ -259,7 +259,7 @@ class Idle extends \Exception
      *
      * This is restricted to Hoa's exceptions only.
      */
-    public static function enableUncaughtHandler(bool $enable = true)
+    public static function enableUncaughtHandler(bool $enable = true): mixed
     {
         if (false === $enable) {
             return restore_exception_handler();

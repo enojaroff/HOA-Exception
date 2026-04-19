@@ -55,9 +55,9 @@ class Group extends Exception implements \ArrayAccess, \IteratorAggregate, \Coun
      */
     public function __construct(
         string $message,
-        int $code            = 0,
-        array $arguments     = [],
-        \Exception $previous = null
+        int $code             = 0,
+        array $arguments      = [],
+        ?\Throwable $previous = null
     ) {
         parent::__construct($message, $code, $arguments, $previous);
         $this->_group = new \SplStack();
@@ -147,7 +147,7 @@ class Group extends Exception implements \ArrayAccess, \IteratorAggregate, \Coun
     /**
      * Checks if an index in the group exists.
      */
-    public function offsetExists($index): bool
+    public function offsetExists(mixed $index): bool
     {
         foreach ($this->_group as $group) {
             if (isset($group[$index])) {
@@ -161,7 +161,7 @@ class Group extends Exception implements \ArrayAccess, \IteratorAggregate, \Coun
     /**
      * Returns an exception from the group.
      */
-    public function offsetGet($index): ?Exception
+    public function offsetGet(mixed $index): ?Exception
     {
         foreach ($this->_group as $group) {
             if (isset($group[$index])) {
@@ -175,10 +175,10 @@ class Group extends Exception implements \ArrayAccess, \IteratorAggregate, \Coun
     /**
      * Sets an exception in the group.
      */
-    public function offsetSet($index, $exception)
+    public function offsetSet(mixed $index, mixed $exception): void
     {
         if (!($exception instanceof \Exception)) {
-            return null;
+            return;
         }
 
         $group = $this->_group->top();
@@ -196,7 +196,7 @@ class Group extends Exception implements \ArrayAccess, \IteratorAggregate, \Coun
     /**
      * Removes an exception in the group.
      */
-    public function offsetUnset($index): void
+    public function offsetUnset(mixed $index): void
     {
         foreach ($this->_group as $group) {
             if (isset($group[$index])) {
